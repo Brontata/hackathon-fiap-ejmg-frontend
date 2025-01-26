@@ -3,12 +3,21 @@
 **Versão:** 1.0.0  
 **Descrição:** Aplicação mobile desenvolvida com React Native e Expo.
 
+## Tecnologias utilizadas
+
+<img src="https://img.shields.io/badge/Node%20js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" /> <img src="https://img.shields.io/badge/Expo-1B1F23?style=for-the-badge&logo=expo&logoColor=white" /> <img src="https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" /> <img src="https://img.shields.io/badge/axios-671ddf?&style=for-the-badge&logo=axios&logoColor=white"    />
+
 ## Sumário
 
-1. [Setup Inicial](#setup-inicial)
-2. [Arquitetura da Aplicação](#arquitetura-da-aplicação)
-3. [Guia de Uso](#guia-de-uso)
-4. [Dependências](#dependências)
+- [Tech Challenge Mobile](#tech-challenge-mobile)
+  - [Tecnologias utilizadas](#tecnologias-utilizadas)
+  - [Sumário](#sumário)
+  - [Setup Inicial](#setup-inicial)
+  - [Arquitetura da Aplicação](#arquitetura-da-aplicação)
+  - [Guia de Uso](#guia-de-uso)
+  - [Principais Funcionalidades](#principais-funcionalidades)
+  - [Dependências](#dependências)
+    - [Principais](#principais)
 
 ---
 
