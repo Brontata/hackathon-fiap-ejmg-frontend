@@ -6,7 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './pages/Home';
 import { Ionicons } from '@expo/vector-icons';
 import GameInitScreen from './pages/GameInit';
-
+import LoginPage from './pages/Login';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -27,7 +27,7 @@ const TabsNavigator = () => {
             ),
         }}
       />
-        <Tab.Screen
+      <Tab.Screen
         name="GameInit"
         component={GameInitScreen}
         options={{
@@ -39,7 +39,17 @@ const TabsNavigator = () => {
             ),
         }}
       />
+
+      <Tab.Screen
+        name="Login"
+        component={LoginPage}
+       
+      />
+
+
     </Tab.Navigator>
+
+
   );
 };
 
@@ -71,11 +81,11 @@ const MyStack = () => {
 
 const App = () => {
   return (
-      <View style={styles.container}>
-        <View style={styles.content}>
-          <MyStack />
-        </View>
+    <View style={styles.container}>
+      <View style={styles.content}>
+        <MyStack />
       </View>
+    </View>
   );
 };
 
