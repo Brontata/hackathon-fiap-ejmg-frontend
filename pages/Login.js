@@ -1,39 +1,69 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { AsyncStorage } from 'react-native';
+
+
 
 const LoginPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleLogin = () => {
-    // Lógica de autenticação (substituir com seu back-end)
-    if (email === 'user@example.com' && password === 'password123') {
-      Alert.alert('Login bem-sucedido!', `Bem-vindo, ${email}`);
-    } else {
-      Alert.alert('Erro de login', 'E-mail ou senha inválidos.');
+  const [cpf, setCpf] = useState('');
+  function validarCPF(cpf) {
+    if (!/^\d{11}$/.test(cpf)) {
+      return false;
     }
+    
+    const cpfArray = cpf.split('').map(Number);
+    const soma1 = cpfArray.slice(0, 9).reduce((acc, curr, index) => acc + curr * (10 - index), 0);
+    const resto1 = soma1 % 11;
+    const digito1 = resto1 < 2 ? 0 : 11 - resto1;
+    
+    if (cpfArray[9] !== digito1) {
+      return false;
+    }
+    
+    const soma2 = cpfArray.slice(0, 10).reduce((acc, curr, index) => acc + curr * (11 - index), 0);
+    const resto2 = soma2 % 11;
+    const digito2 = resto2 < 2 ? 0 : 11 - resto2;
+    
+    return cpfArray[10] === digito2;
+  }
+  
+  const handleLogin = async () => {
+    
+    if (validarCPF(cpf) === false) {
+      Alert.alert('CPF inválido');
+      return;
+    }
+    
+    console.log('cpf', cpf);
+    const login = await fetch(`https://hackathon-fiap-ejmg-backend.onrender.com/api/user/${cpf}`);
+    console.log('login.status', login.status);
+
+    if (login.status !== 200) {
+      Alert.alert('CPF não localizado. Contate o seu professor para mais informações.');
+    }else{
+      const loginJson = await login.json();
+      console.log('loginJson', loginJson);
+      AsyncStorage.setItem('user', loginJson);
+    }
+    
+
+
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Bem-vindo</Text>
-      <Text style={styles.subtitle}>Faça login para continuar</Text>
+      <Text style={styles.subtitle}>Identifique-se para continuar</Text>
       <TextInput
         style={styles.input}
-        placeholder="E-mail"
-        keyboardType="email-address"
-        value={email}
-        onChangeText={(text) => setEmail(text)}
+        placeholder="Digite seu CPF"
+        keyboardType="text"
+        value={cpf}
+        onChangeText={(text) => setCpf(text)}
       />
-      <TextInput
-        style={styles.input}
-        placeholder="Senha"
-        secureTextEntry
-        value={password}
-        onChangeText={(text) => setPassword(text)}
-      />
+      
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Login</Text>
+        <Text style={styles.buttonText}>Entrar</Text>
       </TouchableOpacity>
     </View>
   );
