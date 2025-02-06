@@ -40,8 +40,6 @@ const GameInit = () => {
   const [isGameFinished, setIsGameFinished] = useState(false);
   const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
 
-  //console.log('user = ', AsyncStorage.getItem('user'));
-
   useEffect(() => {
     const fetchData = async () => {
       try {

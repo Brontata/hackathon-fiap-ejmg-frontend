@@ -6,8 +6,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './pages/Home';
 import { Ionicons } from '@expo/vector-icons';
 import GameInitScreen from './pages/GameInit';
-import LoginPage from './pages/Login';
+import LoginScreen from './pages/Login';
 import { AuthContextProvider } from './context/authContext';
+import Cadastro from './pages/NewUser';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -45,7 +46,7 @@ const MyStack = () => {
         <Stack.Navigator>
           <Stack.Screen
             name="Login"
-            component={LoginPage}
+            component={LoginScreen}
             options={{ headerShown: false }}
           />
 
@@ -56,6 +57,7 @@ const MyStack = () => {
           />
           <Stack.Screen name="GameInit" component={GameInitScreen} />
           <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Cadastro" component={Cadastro} />
 
         </Stack.Navigator>
       </AuthContextProvider>

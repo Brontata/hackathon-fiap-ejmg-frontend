@@ -5,8 +5,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AuthContext } from '../context/authContext';
 
 
-const LoginPage = ({ navigation }) => {
-  const {user, setUser} = React.useContext(AuthContext);
+const LoginScreen = ({ navigation }) => {
+  const {user, setUser, setScore} = React.useContext(AuthContext);
   const [cpf, setCpf] = useState('');
   
   function validarCPF(cpf) {
@@ -38,37 +38,31 @@ const LoginPage = ({ navigation }) => {
         return;
       }
 
-      console.log('cpf', cpf);
       const login = await fetch(`https://hackathon-fiap-ejmg-backend.onrender.com/api/user/${cpf}`);
-      console.log('login.status', login.status);
 
       if (login.status !== 200) {
         Alert.alert('CPF não localizado. Contate o seu professor para mais informações.');
       } else {
         const loginJson = await login.json();
-        console.log('loginJson', loginJson);
-        
         const loginJsonString = JSON.stringify(loginJson);
         AsyncStorage.setItem('user', loginJsonString);
-        
-        
         setUser(loginJson);
 
-        /*const score = await fetch(`https://hackathon-fiap-ejmg-backend.onrender.com/api/user/score?cpf=${cpf}`);
-        console.log('score.status', score.status);
+        const score = await fetch(`https://hackathon-fiap-ejmg-backend.onrender.com/api/user/score?cpf=${cpf}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          });
+        
         const scoreJson = await score.json();
-        console.log('scoreJson', scoreJson);
-        */
-
+        setScore(scoreJson);
         navigation.navigate('Home');
 
       }
     } catch (error) {
       console.log('error', error);
     }
-
-
-
   };
 
   return (
@@ -86,6 +80,10 @@ const LoginPage = ({ navigation }) => {
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Entrar</Text>
       </TouchableOpacity>
+
+      <Text style={styles.link} onPress={() => navigation.navigate('Cadastro')}>
+        Não tem conta? Cadastre-se aqui
+      </Text>
     </View>
   );
 };
@@ -132,6 +130,12 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
   },
+  link: {
+    fontSize: 14,
+    color: 'blue',
+    marginBottom: 20,
+    marginTop: 20,
+  },
 });
 
-export default LoginPage;
+export default LoginScreen;

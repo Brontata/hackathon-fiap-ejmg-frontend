@@ -6,7 +6,7 @@ import { AuthContext } from '../context/authContext';
 
 const Header = () => {
 
-  const {user} = React.useContext(AuthContext);
+  const {user, score} = React.useContext(AuthContext);
 
   return (
     <View style={styles.container}>
@@ -16,7 +16,7 @@ const Header = () => {
       {/* Ícone de estrela dourado e pontuação no centro */}
       <View style={styles.centerContainer}>
         <Ionicons name="star" size={24} color="#FFD700" />
-        <Text style={styles.points}>1500</Text> 
+        <Text style={styles.points}>{score.score}</Text> 
       </View>
       
       {/* Espaço vazio à direita para equilíbrio */}
