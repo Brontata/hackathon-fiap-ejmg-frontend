@@ -6,6 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './pages/Home';
 import { Ionicons } from '@expo/vector-icons';
 import GameInitScreen from './pages/GameInit';
+import Header from './components/Header';
 
 
 const Tab = createBottomTabNavigator();
@@ -19,6 +20,7 @@ const TabsNavigator = () => {
         name="Home"
         component={HomeScreen}
         options={{
+          headerShown: false,
           tabBarIcon: ({ focused, color, size }) =>
             focused ? (
               <Ionicons name="home" size={size} color={color} />
@@ -28,8 +30,8 @@ const TabsNavigator = () => {
         }}
       />
         <Tab.Screen
-        name="GameInit"
-        component={GameInitScreen}
+        name="login"
+        component={HomeScreen}
         options={{
           tabBarIcon: ({ focused, color, size }) =>
             focused ? (
@@ -52,17 +54,7 @@ const MyStack = () => {
           component={TabsNavigator}
           options={{ headerShown: false }}
         />
-        {/* <Stack.Screen
-          name="PostDetails"
-          component={PostDetails}
-          options={{ title: 'Detalhes do Post' }}
-        />
-        <Stack.Screen name="Register" component={RegisterScreen} />
-        <Stack.Screen
-          name="EditPost"
-          component={EditPost}
-          options={{ title: 'Editar Post' }}
-        /> */}
+        <Stack.Screen name="GameInit" component={GameInitScreen} />
 
       </Stack.Navigator>
     </NavigationContainer>
@@ -72,6 +64,7 @@ const MyStack = () => {
 const App = () => {
   return (
       <View style={styles.container}>
+        <Header />
         <View style={styles.content}>
           <MyStack />
         </View>
