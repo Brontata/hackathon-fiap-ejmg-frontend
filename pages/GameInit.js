@@ -6,6 +6,7 @@ import {
   FlatList,
   Dimensions,
 } from "react-native";
+import { AuthContext } from '../context/authContext';
 
 // Dados Mockados (enquanto a API não funciona)
 const mockData = {
@@ -38,6 +39,7 @@ const GameInit = () => {
   const [answers, setAnswers] = useState({});
   const [isGameFinished, setIsGameFinished] = useState(false);
   const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
+  const {user} = React.useContext(AuthContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -73,7 +75,7 @@ const GameInit = () => {
     setCorrectAnswersCount(correctCount);
     setIsGameFinished(true);
 
-    const data = { userId: 'fb19d3c7-b92c-4fb2-8630-8d181caacfee', gameId: '1', score: correctCount*10 };
+    const data = { userId: user.id, gameId: '1', score: correctCount*10 };
 
     try {
       const response = await fetch('https://hackathon-fiap-ejmg-backend.onrender.com/api/user/score', {
