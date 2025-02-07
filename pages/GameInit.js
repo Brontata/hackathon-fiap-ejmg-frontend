@@ -75,7 +75,7 @@ const GameInit = () => {
     setCorrectAnswersCount(correctCount);
     setIsGameFinished(true);
 
-    const data = { userId: user.cpf, gameId: '1', score: correctCount*10 };
+    const data = { userId: user.id, gameId: '1', score: correctCount*10 };
 
     try {
       const response = await fetch('https://hackathon-fiap-ejmg-backend.onrender.com/api/user/score', {
