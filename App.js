@@ -10,34 +10,7 @@ import LoginScreen from './pages/Login';
 import { AuthContextProvider } from './context/authContext';
 import Cadastro from './pages/NewUser';
 
-const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
-
-const TabsNavigator = () => {
-
-  return (
-    <AuthContextProvider>
-
-      <Tab.Navigator>
-        <Tab.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{
-            headerShown: false,
-            tabBarIcon: ({ focused, color, size }) =>
-              focused ? (
-                <Ionicons name="home" size={size} color={color} />
-              ) : (
-                <Ionicons name="home-outline" size={size} color={color} />
-              ),
-          }}
-        />
-      </Tab.Navigator>
-    </AuthContextProvider>
-
-
-  );
-};
 
 const MyStack = () => {
   return (
@@ -49,15 +22,9 @@ const MyStack = () => {
             component={LoginScreen}
             options={{ headerShown: false }}
           />
-
-          <Stack.Screen
-            name="MainTabs"
-            component={TabsNavigator}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen name="GameInit" component={GameInitScreen} />
-          <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="Cadastro" component={Cadastro} />
+          <Stack.Screen name="GameInit" component={GameInitScreen}  />
+          <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="Cadastro" component={Cadastro} options={{ headerShown: false }} />
 
         </Stack.Navigator>
       </AuthContextProvider>

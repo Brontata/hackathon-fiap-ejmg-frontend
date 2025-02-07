@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { AuthContext } from '../context/authContext';
@@ -44,9 +44,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    position: 'absolute', // Centraliza o conteúdo
-    left: '50%', // Move o centro do conteúdo para o meio
-    transform: [{ translateX: -50 }], // Ajusta para alinhar ao centro exato
+    position: 'absolute',
+    left: '50%',
+    transform: [{ translateX: -50 }],
   },
   points: {
     fontSize: 16,
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   rightSpacer: {
-    width: 50, // Cria um espaço visual para a parte direita
+    width: 50,
   },
 });
 

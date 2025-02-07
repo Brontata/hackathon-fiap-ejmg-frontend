@@ -6,7 +6,6 @@ import {
   FlatList,
   Dimensions,
 } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // Dados Mockados (enquanto a API não funciona)
 const mockData = {
@@ -63,7 +62,7 @@ const GameInit = () => {
   };
 
   // Finaliza o jogo e calcula os acertos
-  const handleFinishGame = () => {
+  const handleFinishGame = async () => {
     let correctCount = 0;
     questions.forEach((q) => {
       if (answers[q.english_word] === q.translate) {
@@ -73,6 +72,27 @@ const GameInit = () => {
 
     setCorrectAnswersCount(correctCount);
     setIsGameFinished(true);
+
+    const data = { userId: 'fb19d3c7-b92c-4fb2-8630-8d181caacfee', gameId: '1', score: correctCount*10 };
+
+    try {
+      const response = await fetch('https://hackathon-fiap-ejmg-backend.onrender.com/api/user/score', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Erro ao enviar os dados');
+      }
+  
+      const result = await response.json();
+      console.log('Resposta da API:', result);
+    } catch (error) {
+      console.error('Erro ao enviar resultados:', error);
+    }
   };
 
   return (

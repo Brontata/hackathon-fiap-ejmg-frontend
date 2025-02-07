@@ -33,10 +33,11 @@ const LoginScreen = ({ navigation }) => {
   const handleLogin = async () => {
 
     try {
-      if (validarCPF(cpf) === false) {
-        Alert.alert('CPF inválido');
-        return;
-      }
+    //está entrando nesse if não funcionando
+      // if (validarCPF(cpf) === false) {
+      //   Alert.alert('CPF inválido');
+      //   return;
+      // }
 
       const login = await fetch(`https://hackathon-fiap-ejmg-backend.onrender.com/api/user/${cpf}`);
 
