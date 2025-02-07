@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "tech-challenge-mobile",
-    "slug": "tech-challenge-mobile",
+    "name": "hackathon",
+    "slug": "hackathon-game",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
